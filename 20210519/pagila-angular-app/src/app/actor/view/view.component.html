@@ -1,0 +1,60 @@
+<div>
+  <h1>Actor Overview</h1>
+  <div *ngIf="errorMsg" class="mat-elevation-z8">
+    <div *ngIf="errorMsg" class="alert alert-danger">{{ errorMsg }}</div>
+  </div>
+  <div class="mat-elevation-z8">
+    <div class="spinner-container" *ngIf="isLoading">
+      <mat-spinner></mat-spinner>
+    </div>
+    <table mat-table *ngIf="!isLoading && dataSource" [dataSource]="dataSource">
+      <ng-container matColumnDef="actorId">
+        <th mat-header-cell *matHeaderCellDef>Actor Id</th>
+        <td mat-cell *matCellDef="let element">{{ element.actorId }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef>First Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.firstName }}</td>
+      </ng-container>
+
+      <!-- lastName Column -->
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef>Last Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.lastName }}</td>
+      </ng-container>
+
+      <!-- lastUpdate Column -->
+      <ng-container matColumnDef="lastUpdate">
+        <th mat-header-cell *matHeaderCellDef>Last Update</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.lastUpdate | date: "short" }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element">
+          <a mat-button color="primary" href="/actor/edit/{{ element.actorId }}"
+            >Update</a
+          >
+          <button
+            mat-button
+            color="warn"
+            type="button"
+            (click)="actorRemove(element.actorId)"
+          >
+            delete
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <mat-paginator
+      [pageSizeOptions]="[10, 50, 100]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+  <a mat-button href="/actor/new">Create New</a>
+</div>

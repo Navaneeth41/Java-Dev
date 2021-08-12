@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+<!--  
+   <bean id="dbConfig" class="com.techdev.pagila.dao.DbConfig">
+	    <constructor-arg index="0" value="postgrestek"/>
+	    <constructor-arg index="1" value="nbmax123"/>
+   </bean>
+   -->
+       <bean id="dbConfig" class="com.techdev.pagila.dao.DbConfig">
+          <property name = "userName" value="postgrestek"/>
+          <property name = "password" value = "nbmax123"/>
+   </bean>
+
+   <bean id="dao" class="com.techdev.pagila.dao.PagilaDaoImpl">
+   		<constructor-arg index="0" ref="dbConfig"/>
+   </bean>
+</beans>

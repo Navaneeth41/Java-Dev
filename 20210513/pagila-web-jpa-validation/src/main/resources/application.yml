@@ -1,0 +1,23 @@
+server:
+  port: 8081
+spring:
+  jpa:
+    hibernate:
+      show_sql: true
+      ddl-auto: update
+    #properties:
+    #  hibernate:
+    #    default_schema: test_data
+    #database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  datasource:
+    #initialization-mode: always
+    #driver-class-name: org.postgresql.Driver
+    platform: postgres
+    url: jdbc:postgresql://postgrestekdev.cd6oucy10xvk.us-east-2.rds.amazonaws.com:5432/postgrestekdev?currentSchema=pagila
+    username: postgrestek
+    password: nbmax123
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 5
+      max-lifetime: 900000

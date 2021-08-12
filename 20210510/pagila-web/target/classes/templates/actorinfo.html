@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head> 
+    <title>Actor Info</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Actor Details</h1>
+<th:block th:if="${statusMessage}">
+	<h4 th:value="*{statusMessage}"> </h4>
+</th:block>
+<th:block th:if="${actor?.actorid}">
+    <form action="#" th:action="@{/actor_app/update_actor/{id}(id = ${actor.actorid})}" th:object="${actor}" method="post"  modelAttribute="actorFormData">
+        <p>First Name: <input type = "text" name = "firstname"  th:value="*{firstname}" /></p>
+     	<p>Last Name: <input type = "text" name = "lastname"   th:value="*{lastname}" /></p>
+     	<input type = "submit" value = "Update" />
+    </form>
+    <form action="#" th:action="@{/actor_app/delete_actor/{id}(id = ${actor.actorid})}" th:object="${actor}" method="get"  modelAttribute="actorFormData">
+     	<input type = "submit" value = "Delete" />
+    </form>
+</th:block>
+<th:block th:unless="${actor?.actorid}">
+    <form action="#" th:action="@{/actor_app/actor}" th:object="${actor}" method="post" modelAttribute="actorFormData">
+        <p>First Name: <input type = "text" name = "firstname" /></p>
+     	<p>Last Name: <input type = "text" name = "lastname"/></p>
+
+     	<input type = "submit" value = "Add" />
+    </form>
+</th:block>
+</body>
+</html>

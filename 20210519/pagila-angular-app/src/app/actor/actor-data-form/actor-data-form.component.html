@@ -1,0 +1,75 @@
+<div class="row">
+  <div class="col-sm-12" ng-if="actorForm">
+    <form [formGroup]="actorForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-sm-5 form-group">
+          <label for="firstName">First Name</label>
+          <input
+            type="text"
+            id="firstName"
+            class="form-control"
+            formControlName="firstName"
+          />
+          <div
+            *ngIf="
+              formControls.firstName.touched && formControls.firstName.invalid
+            "
+          >
+            <div
+              *ngIf="
+                formControls.firstName.errors &&
+                formControls.firstName.errors.required
+              "
+              class="alert alert-danger"
+            >
+              First Name is required.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-5 form-group">
+          <label for="lastName">Last Name</label>
+          <input
+            type="text"
+            id="lastName"
+            class="form-control"
+            formControlName="lastName"
+          />
+          <div
+            *ngIf="
+              formControls.lastName.touched && formControls.lastName.invalid
+            "
+          >
+            <div
+              *ngIf="
+                formControls.lastName.errors &&
+                formControls.lastName.errors.required
+              "
+              class="alert alert-danger"
+            >
+              Last Name is required.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <button class="btn btn-success" type="submit">Save</button>
+          <button class="btn btn-danger" type="button" (click)="onCancel()">
+            Cancel
+          </button>
+          <div
+            class="col-sm-5 form-group"
+            *ngIf="formError && actorForm.invalid"
+          >
+            <div class="alert alert-danger">
+              Please correct errors and try again.
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

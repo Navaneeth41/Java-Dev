@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head> 
+    <title>Customer Info</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Customer Details</h1>
+<th:block th:if="${statusMessage}">
+	<h4 th:value="*{statusMessage}"> </h4>
+</th:block>
+<th:block th:if="${customer?.customerId}">
+    <form action="#" th:action="@{/customer_app/update_customer/{id}(id = ${customer.customerId})}" th:object="${customer}" method="post"  modelAttribute="customerFormData">
+        <p>First Name: <input type = "text" name = "firstName"  th:value="*{firstName}" /></p>
+     	<p>Last Name: <input type = "text" name = "lastName"   th:value="*{lastName}" /></p>
+     	<p>Store Id: <input type = "text" name = "storeId"   th:value="*{storeId}" /></p>
+     	<p>Address Id: <input type = "text" name = "addressId"   th:value="*{addressId}" /></p>
+     	<input type = "submit" value = "Update" />
+    </form>
+    <form action="#" th:action="@{/customer_app/delete_customer/{id}(id = ${customer.customerId})}" th:object="${customer}" method="get"  modelAttribute="customerFormData">
+     	<input type = "submit" value = "Delete" />
+    </form>
+</th:block>
+<th:block th:unless="${customer?.customerId}">
+    <form action="#" th:action="@{/customer_app/customer}" th:object="${customer}" method="post" modelAttribute="customerFormData">
+        <p>First Name: <input type = "text" name = "firstName" /></p>
+     	<p>Last Name: <input type = "text" name = "lastName"/></p>
+     	<p>Store Id: <input type = "text" name = "storeId" /></p>
+     	<p>Address Id: <input type = "text" name = "addressId"/></p>
+     	<input type = "submit" value = "Add" />
+    </form>
+</th:block>
+</body>
+</html>
